@@ -27,10 +27,8 @@ create table booking
 create table booking_status_type
 (
     booking_status_type_id bigint not null auto_increment,
-    create_time datetime(6) not null,
     description varchar(255) not null,
     name varchar(255) not null,
-    update_time datetime(6) not null,
     primary key (booking_status_type_id)
 );
 
@@ -62,10 +60,8 @@ create table communication
 create table communication_type
 (
     communication_type_id bigint not null auto_increment,
-    create_time datetime(6) not null,
     description varchar(255) not null,
     name varchar(255) not null,
-    update_time datetime(6) not null,
     primary key (communication_type_id)
 );
 
@@ -133,10 +129,8 @@ create table rule
 create table send_channel_type
 (
     send_channel_type_id bigint not null auto_increment,
-    create_time datetime(6) not null,
     description varchar(255) not null,
     name varchar(255) not null,
-    update_time datetime(6) not null,
     primary key (send_channel_type_id)
 );
 
