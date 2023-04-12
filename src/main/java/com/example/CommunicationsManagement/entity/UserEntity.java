@@ -8,16 +8,19 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
-public class UserEntity extends Object{
+@Table(name = "usr")
+public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true, name = "user_id")
@@ -28,8 +31,8 @@ public class UserEntity extends Object{
     private String lastName;
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
-    @Column(nullable = false, unique = true, name = "login")
-    private String login;
+    @Column(nullable = false, unique = true, name = "username")
+    private String username;
     @Column(nullable = false, name = "password")
     private String password;
     @CreationTimestamp
@@ -41,7 +44,7 @@ public class UserEntity extends Object{
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<RoleEntity> roles = new ArrayList<>();
@@ -62,4 +65,33 @@ public class UserEntity extends Object{
         return String.join(" ", getLastName(), getFirstName());
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
