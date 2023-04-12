@@ -21,8 +21,12 @@ public class RuleEntity {
     private int timeLimit;
     @Column(nullable = false, name = "communication_limit")
     private long communicationLimit;
-
-
+    @Column(nullable = false, name = "blocking_communications")
+    private long blockingCommunications;
+    @Column(nullable = false, name = "blocking_period")
+    private long blockingPeriod;
+    @Column(nullable = false, name = "not_communication_days")
+    private long notCommunicationDays;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")
@@ -31,8 +35,6 @@ public class RuleEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
-
-
 
     public RuleEntity() {
     }

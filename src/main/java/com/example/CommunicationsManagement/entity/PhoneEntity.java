@@ -25,6 +25,8 @@ public class PhoneEntity {
     private String operatorCode;
     @Column(nullable = false, name = "phone_number")
     private String phoneNumber;
+    @Column(nullable = true, name = "primary")
+    private boolean primary = false;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")
