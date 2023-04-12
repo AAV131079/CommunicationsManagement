@@ -31,8 +31,8 @@ public class UserEntity implements UserDetails {
     private String lastName;
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
-    @Column(nullable = false, unique = true, name = "username")
-    private String username;
+    @Column(nullable = false, unique = true, name = "user_name")
+    private String userName;
     @Column(nullable = false, name = "password")
     private String password;
     @CreationTimestamp
@@ -72,7 +72,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     @Override
