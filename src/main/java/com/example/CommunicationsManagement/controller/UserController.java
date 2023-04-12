@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -27,8 +26,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public UserEntity getUser(@PathVariable Long id) {
-        Optional<UserEntity> user = userService.findById(id);
-        return user.orElse(null);
+        return userService.findById(id).orElseThrow();
     }
 
     @PostMapping("/add")

@@ -1,8 +1,8 @@
 package com.example.CommunicationsManagement.controller;
 
-import com.example.CommunicationsManagement.entity.ClientEntity;
 import com.example.CommunicationsManagement.entity.handbook.CommunicationTypeEntity;
-import com.example.CommunicationsManagement.repository.CommunicationTypeRepository;
+import com.example.CommunicationsManagement.service.CommunicationTypeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,31 +12,33 @@ import java.util.List;
 @RequestMapping("/communication_types")
 public class CommunicationTypeController {
 
-    private final CommunicationTypeRepository communicationTypeRepository;
+    private final CommunicationTypeService communicationTypeService;
 
     @Autowired
-    public CommunicationTypeController(CommunicationTypeRepository communicationTypeRepository) {
-        this.communicationTypeRepository = communicationTypeRepository;
+    public CommunicationTypeController(CommunicationTypeService communicationTypeService) {
+        this.communicationTypeService = communicationTypeService;
     }
 
     @GetMapping
     public List<CommunicationTypeEntity> communicationTypesList() {
-        return communicationTypeRepository.findAll();
+        return communicationTypeService.findAll();
     }
 
     @GetMapping("{id}")
     public CommunicationTypeEntity getCommunicationType(@PathVariable Long id) {
-        return null;
+        return communicationTypeService.findById(id).orElseThrow();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public CommunicationTypeEntity createCommunicationType(@RequestBody CommunicationTypeEntity communicationType) {
-        return communicationTypeRepository.save(communicationType);
+        return communicationTypeService.save(communicationType);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit/{id}")
     public CommunicationTypeEntity updateCommunicationType(@PathVariable Long id, @RequestBody CommunicationTypeEntity communicationType) {
-        return communicationTypeRepository.save(communicationType);
+        CommunicationTypeEntity existingCommunicationType = communicationTypeService.findById(id).orElseThrow();
+        BeanUtils.copyProperties(communicationType, existingCommunicationType, "communicationTypeId", "createTime", "updateTime");
+        return communicationTypeService.save(existingCommunicationType);
     }
 
 }
