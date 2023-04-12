@@ -1,7 +1,6 @@
 package com.example.CommunicationsManagement.controller;
 
 import com.example.CommunicationsManagement.entity.ClientEntity;
-import com.example.CommunicationsManagement.repository.ClientRepository;
 import com.example.CommunicationsManagement.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +29,14 @@ public class ClientController {
         return client.orElse(null);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ClientEntity createClient(@RequestBody ClientEntity client) {
         return clientService.save(client);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/edit/{id}")
     public ClientEntity updateClient(@PathVariable Long id, @RequestBody ClientEntity client) {
-        return clientService.save(client);
+        return clientService.update(id, client);
     }
 
 }
