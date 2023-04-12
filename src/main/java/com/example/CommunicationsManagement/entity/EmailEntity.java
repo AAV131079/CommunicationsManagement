@@ -21,8 +21,8 @@ public class EmailEntity {
     private Long emailId;
     @Column(nullable = false, name = "email")
     private String email;
-    @Column(nullable = true, name = "primary")
-    private boolean primary = false;
+    @Column(nullable = false, name = "is_primary")
+    private boolean isPrimary;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")

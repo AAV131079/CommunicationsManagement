@@ -1,6 +1,5 @@
 package com.example.CommunicationsManagement.entity;
 
-import com.example.CommunicationsManagement.entity.handbook.CommunicationTypeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +13,16 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "communication")
-public class CommunicationEntity {
+@Table(name = "booking")
+public class BookingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true, name = "communication_id")
-    private Long communicationId;
+    @Column(nullable = false, unique = true, name = "booking_id")
+    private Long bookingId;
+    @Column(nullable = false, name = "before_date")
+    private Date beforeDate;
+    @Column(nullable = false, name = "status")
+    private String status;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")
@@ -29,19 +32,6 @@ public class CommunicationEntity {
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
 
-    @OneToOne
-    @JoinColumn(name = "communication_type_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private CommunicationTypeEntity communicationType;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private UserEntity user;
-    @ManyToOne
-    @JoinColumn(name = "booking_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private BookingEntity booking;
-
-    public CommunicationEntity() {
+    public BookingEntity() {
     }
 }

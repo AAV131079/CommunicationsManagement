@@ -38,6 +38,10 @@ public class ClientEntity {
     @JoinColumn(name = "communication_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private CommunicationEntity communication;
+    @ManyToOne
+    @JoinColumn(name = "booking_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private BookingEntity booking;
 
     public ClientEntity() {
     }
