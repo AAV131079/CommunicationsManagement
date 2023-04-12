@@ -1,50 +1,49 @@
 package com.example.CommunicationsManagement.controller;
 
 import com.example.CommunicationsManagement.entity.UserEntity;
-import com.example.CommunicationsManagement.repository.UserRepository;
+import com.example.CommunicationsManagement.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
-
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
     public List<UserEntity> usersList() {
-
-        return userRepository.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("{id}")
-    public UserEntity getUser(@PathVariable UserEntity user) {
-
-        return user;
+    public UserEntity getUser(@PathVariable Long id) {
+        Optional<UserEntity> user = userService.findById(id);
+        return user.orElse(null);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public UserEntity createUser(@RequestBody UserEntity user) {
 
-        return userRepository.save(user);
+        return userService.save(user);
     }
 
-    @PutMapping("{id}")
-    public UserEntity updateUser(@PathVariable UserEntity userFromDB,
+    @PutMapping("/edit/{id}")
+    public UserEntity updateUser(@PathVariable Long id,
                                  @RequestBody UserEntity user) {
+        UserEntity existingUser = userService.findById(id).orElseThrow();
+        BeanUtils.copyProperties(user, existingUser, "userId", "password", "createTime", "updateTime");
 
-        BeanUtils.copyProperties(user, userFromDB, "userId");
-
-        return userRepository.save(userFromDB);
+        return userService.save(existingUser);
     }
 
 }

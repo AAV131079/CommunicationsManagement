@@ -3,6 +3,8 @@ package com.example.CommunicationsManagement.controller;
 import com.example.CommunicationsManagement.entity.ClientEntity;
 import com.example.CommunicationsManagement.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -35,8 +37,14 @@ public class ClientController {
     }
 
     @PutMapping("/edit/{id}")
-    public ClientEntity updateClient(@PathVariable Long id, @RequestBody ClientEntity client) {
-        return clientService.update(id, client);
+    public ResponseEntity<?> updateClient(@PathVariable Long id, @RequestBody ClientEntity client) {
+        try {
+            return ResponseEntity.ok(clientService.update(id, client));
+        } catch (NoSuchElementException e) {
+            Map<Object, Object> response = new HashMap<>();
+            response.put("error", "NoSuchElement");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
