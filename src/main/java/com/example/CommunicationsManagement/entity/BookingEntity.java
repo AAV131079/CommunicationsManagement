@@ -1,5 +1,6 @@
 package com.example.CommunicationsManagement.entity;
 
+import com.example.CommunicationsManagement.entity.handbook.BookingStatusTypeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +22,9 @@ public class BookingEntity {
     private Long bookingId;
     @Column(nullable = false, name = "before_date")
     private Date beforeDate;
-    @Column(nullable = false, name = "status")
-    private String status;
+    @OneToOne
+    @JoinColumn(nullable = false, name = "booking_status_type_id")
+    private BookingStatusTypeEntity status;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")

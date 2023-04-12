@@ -1,5 +1,6 @@
 package com.example.CommunicationsManagement.controller;
 
+import com.example.CommunicationsManagement.entity.BookingEntity;
 import com.example.CommunicationsManagement.entity.ClientEntity;
 import com.example.CommunicationsManagement.service.ClientService;
 import org.springframework.beans.BeanUtils;
@@ -48,6 +49,11 @@ public class ClientController {
     @PostMapping("/add")
     public ClientEntity createClient(@RequestBody ClientEntity client) {
         return clientService.save(client);
+    }
+
+    @PutMapping("/{id}/bookings")
+    public ClientEntity bookingClient(@PathVariable Long id, @RequestBody BookingEntity booking) {
+        return clientService.bookingClient(id, booking);
     }
 
     @PutMapping("/edit/{id}")

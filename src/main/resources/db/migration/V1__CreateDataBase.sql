@@ -19,7 +19,7 @@ create table booking
     booking_id bigint not null auto_increment,
     before_date datetime(6) not null,
     create_time datetime(6) not null,
-    status varchar(255) not null,
+    booking_status_type_id bigint not null,
     update_time datetime(6) not null,
     primary key (booking_id)
 );
