@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "role")
-public class RoleEntity {
+public class RoleEntity implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true, name = "role_id")
@@ -31,5 +32,10 @@ public class RoleEntity {
     private Date updateTime;
 
     public RoleEntity() {
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }
