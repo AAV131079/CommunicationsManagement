@@ -37,6 +37,10 @@ public class PhoneEntity {
     private Date updateTime;
 
     @ManyToOne
+    @JoinColumn(name = "client_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private ClientEntity client;
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private UserEntity user;

@@ -1,13 +1,17 @@
-package com.example.CommunicationsManagement.entity.handbook;
+package com.example.CommunicationsManagement.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,6 +35,11 @@ public class RoleEntity implements GrantedAuthority {
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private UserEntity user;
+
     public RoleEntity() {
     }
 
@@ -38,4 +47,5 @@ public class RoleEntity implements GrantedAuthority {
     public String getAuthority() {
         return name;
     }
+
 }

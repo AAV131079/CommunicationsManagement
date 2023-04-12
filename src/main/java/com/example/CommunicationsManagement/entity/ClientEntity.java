@@ -34,6 +34,10 @@ public class ClientEntity {
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
 
+    @OneToOne
+    @JoinColumn(name = "social_media_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private SocialMediaEntity socialMedia;
     @ManyToOne
     @JoinColumn(name = "communication_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
