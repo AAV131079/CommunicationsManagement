@@ -35,7 +35,8 @@ create table booking
     before_date datetime(6) not null,
     create_time datetime(6) not null,
     status varchar(255) not null,
-    update_time datetime(6) not null, primary key (booking_id)
+    update_time datetime(6) not null,
+    primary key (booking_id)
 );
 
 create table client
@@ -47,7 +48,8 @@ create table client
     last_name varchar(255) not null,
     update_time datetime(6) not null,
     booking_id bigint,
-    communication_id bigint, primary key (client_id)
+    communication_id bigint,
+    primary key (client_id)
 );
 
 create table communication
@@ -57,7 +59,8 @@ create table communication
     update_time datetime(6) not null,
     booking_id bigint,
     communication_type_id bigint,
-    user_id bigint, primary key (communication_id)
+    user_id bigint,
+    primary key (communication_id)
 );
 
 create table communication_type
@@ -66,7 +69,8 @@ create table communication_type
     create_time datetime(6) not null,
     description varchar(255) not null,
     name varchar(255) not null,
-    update_time datetime(6) not null, primary key (communication_type_id)
+    update_time datetime(6) not null,
+    primary key (communication_type_id)
 );
 
 create table department
@@ -75,7 +79,8 @@ create table department
     create_time datetime(6) not null,
     full_name varchar(255) not null, name varchar(255) not null,
     update_time datetime(6) not null,
-    rule_id bigint, primary key (department_id)
+    rule_id bigint,
+    primary key (department_id)
 );
 
 create table email
@@ -85,7 +90,8 @@ create table email
     email varchar(255) not null,
     is_primary bit not null,
     update_time datetime(6) not null,
-    user_id bigint, primary key (email_id)
+    user_id bigint,
+    primary key (email_id)
 );
 
 create table phone
@@ -97,7 +103,8 @@ create table phone
     operator_code varchar(255) not null,
     phone_number varchar(255) not null,
     update_time datetime(6) not null,
-    user_id bigint, primary key (phone_id)
+    user_id bigint,
+    primary key (phone_id)
 );
 
 create table role
@@ -107,6 +114,7 @@ create table role
     description varchar(255) not null,
     name varchar(255) not null,
     update_time datetime(6) not null,
+    user_id bigint,
     primary key (role_id)
 );
 
@@ -189,7 +197,7 @@ alter table communication add constraint FKd85hfscy6k3yq0iarwuht09hm foreign key
 alter table department add constraint FKcyxum1b9pgexglpunrwm8amg4 foreign key (rule_id) references rule (rule_id);
 alter table email add constraint FKo4n7ey7da7adl64srct8ji56s foreign key (user_id) references usr (user_id);
 alter table phone add constraint FKcchyhsnqcjy7dfq2j4286bwk0 foreign key (user_id) references usr (user_id);
-alter table role add constraint FKjjcbyny2rand07lh9nano7mb6 foreign key (role_id) references usr (user_id);
+alter table role add constraint FKjjcbyny2rand07lh9nano7mb6 foreign key (user_id) references usr (user_id);
 alter table sending_channel add constraint FKjdaqrsj1ca8vi86ksxuvx99rm foreign key (rule_id) references rule (rule_id);
 alter table sending_channel add constraint FKrf290mfb0ihdxp0upr5gw0083 foreign key (send_channel_type_id) references send_channel_type (send_channel_type_id);
 alter table sending_status add constraint FKdd7j00w7xpd0t8nnkpasvc378 foreign key (communication_id) references communication (communication_id);
