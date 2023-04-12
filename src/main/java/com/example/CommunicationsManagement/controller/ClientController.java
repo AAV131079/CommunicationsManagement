@@ -2,6 +2,7 @@ package com.example.CommunicationsManagement.controller;
 
 import com.example.CommunicationsManagement.entity.ClientEntity;
 import com.example.CommunicationsManagement.repository.ClientRepository;
+import com.example.CommunicationsManagement.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,31 +12,32 @@ import java.util.*;
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final ClientRepository clientRepository;
+    private final ClientService clientService;
 
     @Autowired
-    public ClientController(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public ClientController(ClientRepository clientRepository, ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @GetMapping
     public List<ClientEntity> clientsList() {
-        return clientRepository.findAll();
+        return clientService.findAll();
     }
 
     @GetMapping("{id}")
     public ClientEntity getClient(@PathVariable Long id) {
-        return null;
+        Optional<ClientEntity> client = clientService.findById(id);
+        return client.orElse(null);
     }
 
     @PostMapping
     public ClientEntity createClient(@RequestBody ClientEntity client) {
-        return clientRepository.save(client);
+        return clientService.save(client);
     }
 
     @PutMapping("{id}")
     public ClientEntity updateClient(@PathVariable Long id, @RequestBody ClientEntity client) {
-        return clientRepository.save(client);
+        return clientService.save(client);
     }
 
 }
