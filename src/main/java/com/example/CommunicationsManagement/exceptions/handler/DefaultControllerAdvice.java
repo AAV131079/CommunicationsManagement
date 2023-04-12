@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 public class DefaultControllerAdvice {
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<Map> handleException(NoSuchElementException e) {
+    public ResponseEntity<Map<String, String>> handleException(NoSuchElementException e) {
         Map<String, String> response = new HashMap<>();
         response.put("error", "No such element by id");
         response.put("description", e.getMessage());
@@ -22,7 +22,7 @@ public class DefaultControllerAdvice {
     }
 
     @ExceptionHandler(PropertyValueException.class)
-    public ResponseEntity<Map> handleException(PropertyValueException e) {
+    public ResponseEntity<Map<String, String>> handleException(PropertyValueException e) {
         Map<String, String> response = new HashMap<>();
         response.put("error", "PropertyValueException");
         response.put("description", e.getMessage());
