@@ -1,6 +1,5 @@
 package com.example.CommunicationsManagement.entity;
 
-import com.example.CommunicationsManagement.entity.handbook.RoleEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "usr")
+@Table(name = "user")
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +43,10 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
 
+    @OneToOne
+    @JoinColumn(name = "social_media_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private SocialMediaEntity socialMedia;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -52,12 +55,17 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "department_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private DepartmentEntity department;
-    @OneToOne
-    @JoinColumn(name = "social_media_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private SocialMediaEntity socialMedia;
 
     public UserEntity() {
+    }
+
+    public void addComment(RoleEntity role) {
+        roles.add(role);
+        role.setUser(this);
+    }
+    public void removeComment(RoleEntity role) {
+        roles.remove(role);
+        role.setUser(null);
     }
 
     @Override
