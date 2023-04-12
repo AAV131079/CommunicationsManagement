@@ -19,11 +19,18 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+    public List<ClientEntity> findByAvailable(boolean available) {
+        return clientRepository.findByAvailable(available);
+    }
+
     public Optional<ClientEntity> findById(Long id) {
         return clientRepository.findById(id);
     }
 
     public ClientEntity save(ClientEntity client) {
+        if (client.getAvailable() == null) {
+            client.setAvailable(true);
+        }
         return clientRepository.save(client);
     }
 

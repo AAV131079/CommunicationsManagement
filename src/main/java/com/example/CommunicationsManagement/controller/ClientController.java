@@ -24,6 +24,11 @@ public class ClientController {
         return clientService.findAll();
     }
 
+    @GetMapping("/available")
+    public List<ClientEntity> clientsListAvailable() {
+        return clientService.findByAvailable(true);
+    }
+
     @GetMapping("{id}")
     public ClientEntity getClient(@PathVariable Long id) {
         return clientService.findById(id).orElseThrow();

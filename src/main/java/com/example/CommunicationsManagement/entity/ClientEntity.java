@@ -33,6 +33,8 @@ public class ClientEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
+    @Column(nullable = false, name = "available")
+    private Boolean available;
 
     @OneToOne
     @JoinColumn(name = "social_media_id")

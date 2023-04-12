@@ -43,6 +43,7 @@ create table client
     booking_id bigint,
     communication_id bigint,
     social_media_id bigint,
+    available TINYINT(1) not null DEFAULT '1',
     primary key (client_id)
 );
 
