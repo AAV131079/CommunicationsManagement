@@ -3,7 +3,6 @@ package com.example.CommunicationsManagement.service;
 import com.example.CommunicationsManagement.entity.handbook.SendChannelTypeEntity;
 import com.example.CommunicationsManagement.repository.SendChannelTypeRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -27,4 +26,5 @@ public class SendChannelTypeService {
     public SendChannelTypeEntity save(SendChannelTypeEntity sendChannelType) {
         return sendChannelTypeRepository.save(sendChannelType);
     }
+
 }

@@ -20,7 +20,6 @@ public class SendingChannelEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true, name = "sending_channel_id")
     private Long sendingChannelId;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")

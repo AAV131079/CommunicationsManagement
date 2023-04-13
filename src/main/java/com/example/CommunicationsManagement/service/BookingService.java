@@ -6,7 +6,6 @@ import com.example.CommunicationsManagement.repository.BookingRepository;
 import com.example.CommunicationsManagement.repository.BookingStatusTypeRepository;
 import org.hibernate.PropertyValueException;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 
 @Service
@@ -35,4 +34,5 @@ public class BookingService {
         bookingRepository.save(bookingEntity);
         return bookingEntity;
     }
+
 }

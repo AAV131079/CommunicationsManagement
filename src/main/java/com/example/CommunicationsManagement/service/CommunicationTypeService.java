@@ -3,7 +3,6 @@ package com.example.CommunicationsManagement.service;
 import com.example.CommunicationsManagement.entity.handbook.CommunicationTypeEntity;
 import com.example.CommunicationsManagement.repository.CommunicationTypeRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -27,4 +26,5 @@ public class CommunicationTypeService {
     public CommunicationTypeEntity save(CommunicationTypeEntity communicationType) {
         return communicationTypeRepository.save(communicationType);
     }
+
 }

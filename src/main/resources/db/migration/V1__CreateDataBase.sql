@@ -3,6 +3,7 @@ drop table if exists booking_status_type;
 drop table if exists client;
 drop table if exists communication;
 drop table if exists communication_type;
+drop table if exists company;
 drop table if exists department;
 drop table if exists email;
 drop table if exists phone;
@@ -66,6 +67,17 @@ create table communication_type
     primary key (communication_type_id)
 );
 
+create table company
+(
+    company_id bigint not null auto_increment,
+    available bit not null,
+    create_time datetime(6) not null,
+    full_name varchar(255) not null,
+    name varchar(255) not null,
+    update_time datetime(6) not null,
+    primary key (company_id)
+);
+
 create table department
 (
     department_id bigint not null auto_increment,
@@ -73,6 +85,7 @@ create table department
     full_name varchar(255) not null,
     name varchar(255) not null,
     update_time datetime(6) not null,
+    company_id bigint,
     rule_id bigint,
     primary key (department_id)
 );
@@ -190,6 +203,7 @@ alter table client add constraint FKdl9gqmkjdtj7kqsflx43aa9y9 foreign key (socia
 alter table communication add constraint FK7uktjs903rws1g728cc89wgul foreign key (booking_id) references booking (booking_id);
 alter table communication add constraint FK2ucuf46xehar2bf7j5uwlr3gm foreign key (communication_type_id) references communication_type (communication_type_id);
 alter table communication add constraint FKt3k0y4r9lcunh7o0ej8p2ltch foreign key (user_id) references user (user_id);
+alter table department add constraint FKh1m88q0f7sc0mk76kju4kcn6f foreign key (company_id) references company (company_id);
 alter table department add constraint FKcyxum1b9pgexglpunrwm8amg4 foreign key (rule_id) references rule (rule_id);
 alter table email add constraint FK7hpes7ib2wlx1opd0aefw9lxd foreign key (client_id) references client (client_id);
 alter table email add constraint FK4qxwfk0jqc0au545318wfiqxx foreign key (user_id) references user (user_id);

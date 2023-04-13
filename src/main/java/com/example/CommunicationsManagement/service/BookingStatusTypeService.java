@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Service
 public class BookingStatusTypeService {
+
     private final BookingStatusTypeRepository bookingStatusTypeRepository;
 
     public BookingStatusTypeService(BookingStatusTypeRepository bookingStatusTypeRepository) {
@@ -25,4 +26,5 @@ public class BookingStatusTypeService {
     public BookingStatusTypeEntity save(BookingStatusTypeEntity bookingStatusType) {
         return bookingStatusTypeRepository.save(bookingStatusType);
     }
+
 }

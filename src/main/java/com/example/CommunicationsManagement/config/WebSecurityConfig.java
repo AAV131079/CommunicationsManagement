@@ -16,9 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
-
     private final UserService userService;
-
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -29,11 +27,8 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
-                .authorizeHttpRequests((request) -> request
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests((request) -> request.anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .httpBasic();
@@ -41,10 +36,8 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)
                 .passwordEncoder(passwordEncoder);
     }
-
 }

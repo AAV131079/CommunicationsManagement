@@ -4,21 +4,18 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "department")
-public class DepartmentEntity {
+@Table(name = "company")
+public class CompanyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true, name = "department_id")
-    private Long departmentId;
+    @Column(nullable = false, unique = true, name = "company_id")
+    private Long companyId;
     @Column(nullable = false, name = "name")
     private String name;
     @Column(nullable = false, name = "full_name")
@@ -31,16 +28,9 @@ public class DepartmentEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
+    @Column(nullable = false, name = "available")
+    private Boolean available;
 
-    @OneToOne
-    @JoinColumn(name = "rule_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private RuleEntity rule;
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private CompanyEntity company;
-
-    public DepartmentEntity() {
+    public CompanyEntity() {
     }
 }

@@ -63,6 +63,7 @@ public class UserEntity implements UserDetails {
         roles.add(role);
         role.setUser(this);
     }
+
     public void removeComment(RoleEntity role) {
         roles.remove(role);
         role.setUser(null);
