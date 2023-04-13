@@ -4,6 +4,5 @@ import com.example.CommunicationsManagement.entity.handbook.BookingStatusTypeEnt
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookingStatusTypeRepository extends JpaRepository<BookingStatusTypeEntity, Long> {
-
     BookingStatusTypeEntity findByName(String booked);
 }
