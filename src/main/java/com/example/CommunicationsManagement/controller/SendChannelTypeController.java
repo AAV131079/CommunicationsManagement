@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +48,13 @@ public class SendChannelTypeController {
         SendChannelTypeEntity existingSendChannelType = sendChannelTypeService.findById(id).orElseThrow();
         BeanUtils.copyProperties(sendChannelType, existingSendChannelType, "sendChannelTypeId", "createTime", "updateTime");
         return sendChannelTypeService.save(existingSendChannelType);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("Удаление канала коммуникации по id")
+    public ResponseEntity<String> deleteSendChannelType(@PathVariable Long id) {
+        sendChannelTypeService.deleteById(id);
+        return new ResponseEntity<>("{\"response\":\"Канал коммуникации успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
     }
 
 }

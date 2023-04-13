@@ -5,6 +5,8 @@ import com.example.CommunicationsManagement.service.CommunicationTypeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +47,13 @@ public class CommunicationTypeController {
         CommunicationTypeEntity existingCommunicationType = communicationTypeService.findById(id).orElseThrow();
         BeanUtils.copyProperties(communicationType, existingCommunicationType, "communicationTypeId", "createTime", "updateTime");
         return communicationTypeService.save(existingCommunicationType);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("Удаление типа коммуникации по id")
+    public ResponseEntity<String> deleteCommunicationType(@PathVariable Long id) {
+        communicationTypeService.deleteById(id);
+        return new ResponseEntity<>("{\"response\":\"Тип коммуникации успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
     }
 
 }

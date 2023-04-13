@@ -73,4 +73,11 @@ public class ClientController {
         return clientService.save(existingClient);
     }
 
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("Удаление клиента по id")
+    public ResponseEntity<String> deleteClient(@PathVariable Long id) {
+        clientService.deleteById(id);
+        return new ResponseEntity<>("{\"response\":\"Клиент успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    }
+
 }

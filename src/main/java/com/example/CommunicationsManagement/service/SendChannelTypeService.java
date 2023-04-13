@@ -27,4 +27,8 @@ public class SendChannelTypeService {
         return sendChannelTypeRepository.save(sendChannelType);
     }
 
+    public int deleteById(Long id) {
+        return sendChannelTypeRepository.deleteBySendChannelTypeId(id);
+    }
+
 }

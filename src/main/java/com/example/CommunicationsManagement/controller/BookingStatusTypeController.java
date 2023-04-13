@@ -7,8 +7,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -47,6 +48,13 @@ public class BookingStatusTypeController {
         BookingStatusTypeEntity existingCommunicationType = bookingStatusTypeService.findById(id).orElseThrow();
         BeanUtils.copyProperties(communicationType, existingCommunicationType, "bookingStatusTypeId", "createTime", "updateTime");
         return bookingStatusTypeService.save(existingCommunicationType);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("Удаление типа бронирования по id")
+    public ResponseEntity<String> deleteBookingStatusType(@PathVariable Long id) {
+        bookingStatusTypeService.deleteById(id);
+        return new ResponseEntity<>("{\"response\":\"Тип бронирования успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
     }
 
 }

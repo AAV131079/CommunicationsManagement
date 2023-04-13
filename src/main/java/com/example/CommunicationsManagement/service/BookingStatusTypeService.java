@@ -27,4 +27,8 @@ public class BookingStatusTypeService {
         return bookingStatusTypeRepository.save(bookingStatusType);
     }
 
+    public int deleteById(Long id) {
+        return bookingStatusTypeRepository.deleteByBookingStatusTypeId(id);
+    }
+
 }

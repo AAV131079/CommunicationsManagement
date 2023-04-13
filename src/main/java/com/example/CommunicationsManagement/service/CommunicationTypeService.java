@@ -27,4 +27,8 @@ public class CommunicationTypeService {
         return communicationTypeRepository.save(communicationType);
     }
 
+    public int deleteById(Long id) {
+        return communicationTypeRepository.deleteByCommunicationTypeId(id);
+    }
+
 }
