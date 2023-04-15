@@ -44,7 +44,6 @@ public class ClientService {
         existingClient.setLastName(client.getLastName());
         existingClient.setBirthDate(client.getBirthDate());
         existingClient.setBooking(client.getBooking());
-        existingClient.setCommunication(client.getCommunication());
         return clientRepository.save(existingClient);
     }
 

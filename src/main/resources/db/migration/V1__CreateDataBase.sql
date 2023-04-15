@@ -1,15 +1,18 @@
 drop table if exists email;
 drop table if exists phone;
+drop table if exists client_communication;
 drop table if exists client;
 drop table if exists sending_status;
+drop table if exists document_communication;
+drop table if exists document;
 drop table if exists communication;
 drop table if exists communication_type;
 drop table if exists booking;
 drop table if exists booking_status_type;
-drop table if exists company;
 drop table if exists role;
 drop table if exists user;
 drop table if exists department;
+drop table if exists company;
 drop table if exists sending_channel;
 drop table if exists send_channel_type;
 drop table if exists rule;
@@ -42,7 +45,6 @@ create table client
     last_name varchar(255) not null,
     update_time datetime(6) not null,
     booking_id bigint,
-    communication_id bigint,
     social_media_id bigint,
     available TINYINT(1) not null DEFAULT '1',
     primary key (client_id)
@@ -52,10 +54,11 @@ create table communication
 (
     communication_id bigint not null auto_increment,
     create_time datetime(6) not null,
-    update_time datetime(6) not null,
     booking_id bigint,
     communication_type_id bigint,
     user_id bigint,
+    content TEXT,
+    description varchar(255),
     primary key (communication_id)
 );
 
@@ -65,6 +68,14 @@ create table communication_type
     description varchar(255) not null,
     name varchar(255) not null,
     primary key (communication_type_id)
+);
+
+create table client_communication
+(
+    id bigint not null auto_increment,
+    client_id bigint not null,
+    communication_id bigint not null,
+    primary key (id)
 );
 
 create table company
@@ -198,7 +209,6 @@ create table user
 
 alter table user add constraint UK_lqjrcobrh9jc8wpcar64q1bfh unique (user_name);
 alter table client add constraint FK83h8npyf4pbq9xm7hnv88seho foreign key (booking_id) references booking (booking_id);
-alter table client add constraint FK9gn696249twt53wqdgidrkcyf foreign key (communication_id) references communication (communication_id);
 alter table client add constraint FKdl9gqmkjdtj7kqsflx43aa9y9 foreign key (social_media_id) references social_media (social_media_id);
 alter table communication add constraint FK7uktjs903rws1g728cc89wgul foreign key (booking_id) references booking (booking_id);
 alter table communication add constraint FK2ucuf46xehar2bf7j5uwlr3gm foreign key (communication_type_id) references communication_type (communication_type_id);

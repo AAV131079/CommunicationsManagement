@@ -24,10 +24,6 @@ public class CommunicationEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "create_time")
     private Date createTime;
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "update_time")
-    private Date updateTime;
 
     @OneToOne
     @JoinColumn(name = "communication_type_id")
@@ -41,6 +37,11 @@ public class CommunicationEntity {
     @JoinColumn(name = "booking_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private BookingEntity booking;
+
+    @Column(columnDefinition="TEXT", name = "content")
+    private String content;
+    @Column(name = "description")
+    private String description;
 
     public CommunicationEntity() {
     }
