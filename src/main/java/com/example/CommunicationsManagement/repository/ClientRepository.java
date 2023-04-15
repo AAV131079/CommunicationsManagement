@@ -10,8 +10,9 @@ import java.util.List;
 
 @Repository
 public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
+
     List<ClientEntity> findByAvailable(boolean b);
-    @Modifying
+
     @Transactional
     int deleteByClientId(long id);
 }

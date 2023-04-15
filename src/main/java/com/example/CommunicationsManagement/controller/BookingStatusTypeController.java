@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/booking_types")
@@ -52,9 +54,12 @@ public class BookingStatusTypeController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление типа бронирования по id")
-    public ResponseEntity<String> deleteBookingStatusType(@PathVariable Long id) {
-        bookingStatusTypeService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Тип бронирования успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteBookingStatusType(@PathVariable Long id) {
+        if (bookingStatusTypeService.deleteById(id) >0) {
+            return new ResponseEntity<>(Map.of("description", "Тип бронирования успешно удален", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/send_channel_types")
@@ -52,9 +54,12 @@ public class SendChannelTypeController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление канала коммуникации по id")
-    public ResponseEntity<String> deleteSendChannelType(@PathVariable Long id) {
-        sendChannelTypeService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Канал коммуникации успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteSendChannelType(@PathVariable Long id) {
+        if (sendChannelTypeService.deleteById(id) >0) {
+            return new ResponseEntity<>(Map.of("description", "Канал коммуникации успешно удален", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

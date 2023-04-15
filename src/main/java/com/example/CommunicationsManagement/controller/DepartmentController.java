@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/departments")
@@ -51,9 +53,12 @@ public class DepartmentController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление департамента компании по id")
-    public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
-        departmentService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Департамент компании успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteDepartment(@PathVariable Long id) {
+        if (departmentService.deleteById(id) >0) {
+            return new ResponseEntity<>(Map.of("description", "Департамент компании успешно удален", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

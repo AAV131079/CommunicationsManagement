@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/users")
@@ -52,9 +54,12 @@ public class UserController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление пользователя по id")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        userService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Пользователь успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable Long id) {
+        if (userService.deleteById(id) >0) {
+            return new ResponseEntity<>(Map.of("description", "Пользователь успешно удален", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface RuleRepository extends JpaRepository<RuleEntity, Long> {
-    @Modifying
+
     @Transactional
     int deleteByRuleId(Long id);
 }

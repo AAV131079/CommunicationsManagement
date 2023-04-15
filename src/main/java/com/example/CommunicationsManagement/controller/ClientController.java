@@ -59,7 +59,7 @@ public class ClientController {
         return clientService.save(client);
     }
 
-    @PutMapping("/{id}/bookings")
+    @PostMapping("/{id}/bookings")
     @ApiOperation("Бронирование клиентов для коммуникации в будущем")
     public ClientEntity bookingClient(@PathVariable Long id, @RequestBody BookingEntity booking) {
         return clientService.bookingClient(id, booking);
@@ -75,9 +75,12 @@ public class ClientController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление клиента по id")
-    public ResponseEntity<String> deleteClient(@PathVariable Long id) {
-        clientService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Клиент успешно удален\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteClient(@PathVariable Long id) {
+        if (clientService.deleteById(id) > 0) {
+            return new ResponseEntity<>(Map.of("description", "Клиент успешно удален", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

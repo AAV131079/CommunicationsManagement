@@ -53,7 +53,7 @@ public class ClientService {
         ClientEntity client = clientRepository.findById(id).orElseThrow();
         BookingEntity newBooking = bookingService.add(booking.getBeforeDate(), booking.getStatus().getName());
         client.setBooking(newBooking);
-        return client;
+        return clientRepository.save(client);
     }
 
     public int deleteById(Long id) {

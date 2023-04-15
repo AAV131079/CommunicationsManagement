@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface CommunicationTypeRepository extends JpaRepository<CommunicationTypeEntity, Long> {
-    @Modifying
+
     @Transactional
     int deleteByCommunicationTypeId(Long id);
 }
