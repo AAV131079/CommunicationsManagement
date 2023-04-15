@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/communications")
@@ -54,9 +56,12 @@ public class CommunicationController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление коммуникации по id")
-    public ResponseEntity<String> deleteCommunication(@PathVariable Long id) {
-        communicationService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Коммуникация успешно удалена\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteCommunication(@PathVariable Long id) {
+        if (communicationService.deleteById(id) >0) {
+            return new ResponseEntity<>(Map.of("description", "Коммуникация успешно удалена", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

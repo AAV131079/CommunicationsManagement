@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+html, body
+{
+    width: 80%;
+    margin: auto;
+}
+
+tr:hover {
+    background: #14D3FF;
+    text-decoration: none;
+}

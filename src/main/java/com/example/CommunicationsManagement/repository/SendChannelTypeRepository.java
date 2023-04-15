@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface SendChannelTypeRepository extends JpaRepository<SendChannelTypeEntity, Long> {
-    @Modifying
+
     @Transactional
     int deleteBySendChannelTypeId(Long id);
 }

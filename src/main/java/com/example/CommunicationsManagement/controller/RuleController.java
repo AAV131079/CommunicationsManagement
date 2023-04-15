@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/rules")
@@ -51,9 +53,12 @@ public class RuleController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Удаление правила коммуникации по id")
-    public ResponseEntity<String> deleteRule(@PathVariable Long id) {
-        ruleService.deleteById(id);
-        return new ResponseEntity<>("{\"response\":\"Правило коммуникации успешно удалено\",\"id\":\"" + id + "\"}", HttpStatus.OK);
+    public ResponseEntity<Map<String, String>> deleteRule(@PathVariable Long id) {
+        if (ruleService.deleteById(id) >0) {
+            return new ResponseEntity<>(Map.of("description", "Правило коммуникации успешно удалено", "id", id.toString()), HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException("No such element by id " + id);
+        }
     }
 
 }

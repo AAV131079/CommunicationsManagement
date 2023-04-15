@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Long> {
-    @Modifying
+
     @Transactional
     int deleteByDepartmentId(Long id);
 }

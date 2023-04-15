@@ -1,19 +1,19 @@
-drop table if exists booking;
-drop table if exists booking_status_type;
-drop table if exists client;
-drop table if exists communication;
-drop table if exists communication_type;
-drop table if exists company;
-drop table if exists department;
 drop table if exists email;
 drop table if exists phone;
-drop table if exists role;
-drop table if exists rule;
-drop table if exists send_channel_type;
-drop table if exists sending_channel;
+drop table if exists client;
 drop table if exists sending_status;
-drop table if exists social_media;
+drop table if exists communication;
+drop table if exists communication_type;
+drop table if exists booking;
+drop table if exists booking_status_type;
+drop table if exists company;
+drop table if exists role;
 drop table if exists user;
+drop table if exists department;
+drop table if exists sending_channel;
+drop table if exists send_channel_type;
+drop table if exists rule;
+drop table if exists social_media;
 
 create table booking
 (
@@ -210,7 +210,6 @@ alter table email add constraint FK4qxwfk0jqc0au545318wfiqxx foreign key (user_i
 alter table phone add constraint FK3o48ec26lujl3kf01hwqplhn2 foreign key (client_id) references client (client_id);
 alter table phone add constraint FKb0niws2cd0doybhib6srpb5hh foreign key (user_id) references user (user_id);
 alter table role add constraint FK61g3ambult7v7nh59xirgd9nf foreign key (user_id) references user (user_id);
-alter table role add constraint FKg38vy2gcj50mg1yunjgfofj9g foreign key (role_id) references user (user_id);
 alter table sending_channel add constraint FKjdaqrsj1ca8vi86ksxuvx99rm foreign key (rule_id) references rule (rule_id);
 alter table sending_channel add constraint FKrf290mfb0ihdxp0upr5gw0083 foreign key (send_channel_type_id) references send_channel_type (send_channel_type_id);
 alter table sending_status add constraint FKdd7j00w7xpd0t8nnkpasvc378 foreign key (communication_id) references communication (communication_id);

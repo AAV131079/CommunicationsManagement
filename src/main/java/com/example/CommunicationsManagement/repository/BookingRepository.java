@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
-    @Modifying
+
     @Transactional
     int deleteByBookingId(Long id);
 }
