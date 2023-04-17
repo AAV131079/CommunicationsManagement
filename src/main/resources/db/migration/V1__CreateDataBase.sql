@@ -1,23 +1,23 @@
-drop table if exists booking;
-drop table if exists booking_status_type;
-drop table if exists client;
-drop table if exists client_communication;
-drop table if exists communication;
-drop table if exists communication_type;
-drop table if exists company;
-drop table if exists department;
-drop table if exists document;
-drop table if exists document_communication;
 drop table if exists email;
 drop table if exists phone;
-drop table if exists role;
-drop table if exists rule;
-drop table if exists send_channel_type;
-drop table if exists sending_channel;
+drop table if exists client_communication;
+drop table if exists client;
 drop table if exists sending_status;
-drop table if exists social_media;
-drop table if exists user;
+drop table if exists document_communication;
+drop table if exists document;
+drop table if exists communication;
+drop table if exists communication_type;
+drop table if exists booking;
+drop table if exists booking_status_type;
 drop table if exists user_role;
+drop table if exists role;
+drop table if exists user;
+drop table if exists department;
+drop table if exists company;
+drop table if exists sending_channel;
+drop table if exists send_channel_type;
+drop table if exists rule;
+drop table if exists social_media;
 
 create table booking
 (
@@ -40,7 +40,7 @@ create table booking_status_type
 create table client
 (
     client_id bigint not null auto_increment,
-    available bit not null,
+    available TINYINT(1) not null DEFAULT '1',
     birth_date datetime(6) not null,
     create_time datetime(6) not null,
     first_name varchar(255) not null,
