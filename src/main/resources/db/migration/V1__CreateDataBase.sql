@@ -229,7 +229,8 @@ create table user_role
     id bigint not null auto_increment,
     role_id bigint not null,
     user_id bigint not null,
-    primary key (id)
+    primary key (id),
+    UNIQUE KEY role_user (role_id, user_id)
 );
 
 alter table user add constraint UK_lqjrcobrh9jc8wpcar64q1bfh unique (user_name);
