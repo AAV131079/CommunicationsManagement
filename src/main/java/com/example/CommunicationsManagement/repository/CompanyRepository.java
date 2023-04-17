@@ -11,4 +11,5 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
 
     @Transactional
     int deleteByCompanyId(Long id);
+
 }

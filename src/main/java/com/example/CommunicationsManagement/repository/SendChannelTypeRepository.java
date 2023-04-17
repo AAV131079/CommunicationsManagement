@@ -11,4 +11,5 @@ public interface SendChannelTypeRepository extends JpaRepository<SendChannelType
 
     @Transactional
     int deleteBySendChannelTypeId(Long id);
+
 }

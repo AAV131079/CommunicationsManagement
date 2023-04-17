@@ -15,4 +15,5 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
     @Transactional
     int deleteByClientId(long id);
+
 }

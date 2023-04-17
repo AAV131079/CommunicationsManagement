@@ -11,4 +11,5 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Lo
 
     @Transactional
     int deleteByDepartmentId(Long id);
+
 }

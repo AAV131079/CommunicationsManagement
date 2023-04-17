@@ -11,4 +11,5 @@ public interface CommunicationTypeRepository extends JpaRepository<Communication
 
     @Transactional
     int deleteByCommunicationTypeId(Long id);
+
 }

@@ -11,4 +11,5 @@ public interface BookingStatusTypeRepository extends JpaRepository<BookingStatus
 
     @Transactional
     int deleteByBookingStatusTypeId(Long id);
+
 }
