@@ -56,7 +56,7 @@ public class RoleService {
      }
 
     public int deleteRoleFromUser(Long roleId, Long userId) {
-        return userRoleRepository.deleteRoleFromUser(roleId, userId);
+        return userRoleRepository.deleteByRoleAndUser(roleRepository.findByRoleId(roleId), userRepository.findByUserId(userId));
     }
 
 

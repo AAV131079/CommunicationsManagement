@@ -46,11 +46,11 @@ public class RoleController {
         return roleService.findUsersByRoleId(id);
     }
 
-    @PostMapping("/add/role/{roleId}{userId}")
+    @PostMapping("/add/role/{roleId}/{userId}")
     @ApiOperation("Добавление роли для пользователя")
     public ResponseEntity<String> addRoleToUser(@PathVariable Long roleId, @PathVariable Long userId) {
         if (Objects.nonNull(roleService.addRoleToUser(roleId, userId))) {
-            new ResponseEntity<>("Role " + roleId + " successfully added to user " + userId, HttpStatus.OK);
+            return new ResponseEntity<>("Role " + roleId + " successfully added to user " + userId, HttpStatus.OK);
         }
         return new ResponseEntity<>("Role " + roleId + " not added to user " + userId + ". Check input data.", HttpStatus.BAD_REQUEST);
     }
@@ -79,7 +79,7 @@ public class RoleController {
         }
     }
 
-    @DeleteMapping("/delete/role/{roleId}{userId}")
+    @DeleteMapping("/delete/role/{roleId}/{userId}")
     @ApiOperation("Удаление роли (по id) у пользователя по id")
     public ResponseEntity<Map<String, String>> deleteRoleFromUser(@PathVariable Long roleId, @PathVariable Long userId) {
         if (roleService.deleteRoleFromUser(roleId, userId) > 0) {
