@@ -11,4 +11,5 @@ public interface RuleRepository extends JpaRepository<RuleEntity, Long> {
 
     @Transactional
     int deleteByRuleId(Long id);
+
 }

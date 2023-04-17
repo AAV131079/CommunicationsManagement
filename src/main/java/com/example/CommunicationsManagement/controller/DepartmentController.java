@@ -1,6 +1,7 @@
 package com.example.CommunicationsManagement.controller;
 
 import com.example.CommunicationsManagement.entity.DepartmentEntity;
+import com.example.CommunicationsManagement.entity.UserEntity;
 import com.example.CommunicationsManagement.service.DepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,17 @@ public class DepartmentController {
     @ApiOperation("Выгрузка департамента компании по id")
     public DepartmentEntity getDepartment(@PathVariable Long id) {
         return departmentService.findById(id).orElseThrow();
+    }
+
+    @GetMapping("/users/{id}")
+    @ApiOperation("Выгрузка списка всех сотрудников департамента компании по id")
+    public List<UserEntity> getUsersListInDepartment(@PathVariable Long id) {
+        List<UserEntity> users = departmentService.findAllUsersById(id);
+        if (users.size() > 0) {
+            return users;
+        } else {
+            throw new NoSuchElementException("No such users in department: id " + id);
+        }
     }
 
     @PostMapping("/add")

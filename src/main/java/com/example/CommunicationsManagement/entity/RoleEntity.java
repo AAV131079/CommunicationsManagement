@@ -35,11 +35,6 @@ public class RoleEntity implements GrantedAuthority {
     @Column(nullable = false, name = "update_time")
     private Date updateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private UserEntity user;
-
     public RoleEntity() {
     }
 

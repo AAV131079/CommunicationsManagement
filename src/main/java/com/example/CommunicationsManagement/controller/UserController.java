@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping
-    @ApiOperation("Получение списка всех пользователей")
+    @ApiOperation("Выгрузка списка всех пользователей")
     public List<UserEntity> usersList() {
         return userService.findAll();
     }

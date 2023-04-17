@@ -9,11 +9,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -47,26 +44,12 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "social_media_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private SocialMediaEntity socialMedia;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private List<RoleEntity> roles = new ArrayList<>();
     @OneToOne
     @JoinColumn(name = "department_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private DepartmentEntity department;
 
     public UserEntity() {
-    }
-
-    public void addComment(RoleEntity role) {
-        roles.add(role);
-        role.setUser(this);
-    }
-
-    public void removeComment(RoleEntity role) {
-        roles.remove(role);
-        role.setUser(null);
     }
 
     @Override
@@ -76,7 +59,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return null;
     }
 
     @Override

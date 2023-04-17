@@ -1,17 +1,16 @@
 package com.example.CommunicationsManagement.repository;
 
-import com.example.CommunicationsManagement.entity.BookingEntity;
+import com.example.CommunicationsManagement.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Repository
-public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
+public interface RoleRepository extends JpaRepository<RoleEntity,Long> {
 
     @Transactional
-    int deleteByBookingId(Long id);
+    int deleteByRoleId(Long id);
+
+    RoleEntity findByRoleId(Long id);
 
 }
